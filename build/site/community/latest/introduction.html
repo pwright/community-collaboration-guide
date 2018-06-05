@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script>
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	item.on('click', '', content, function(e) {
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		e.data.siblings('.content').addClass('hidden');
+		e.data.removeClass('hidden');
+	});
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+$(addBlockSwitches);    
+</script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Community Collaboration Guide</title>
+    <link rel="canonical" href="https://redhat-documentation.github.io/community/latest/introduction.html">
+    <meta name="generator" content="Antora 1.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://redhat-documentation.github.io">Community Collaboration Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/">Documentation Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">AeroGear SDK</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/android-sdk/latest/index.html">Android</a>
+            <a class="navbar-item" href="/ios/latest/index.html">iOS</a>
+            <a class="navbar-item" href="/cordova/latest/index.html">Cordova</a>
+            <a class="navbar-item" href="/xamarin-sdk/latest/index.html">Xamarin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Mobile Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/custom/latest/index.html">Custom Runtime Connector</a>
+            <a class="navbar-item" href="/push/latest/index.html">Unified Push</a>
+            <a class="navbar-item" href="/keycloak/latest/index.html">Auth</a>       
+            <a class="navbar-item" href="/metrics/latest/index.html">Metrics</a>
+            <a class="navbar-item" href="/build/latest/index.html">CI/CD</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="community" data-version="latest">
+  <aside class="navigation" role="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Community Collaboration Guide</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="introduction.html">About Community Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_upstream.html">Contributing Upstream</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="community_evaluation.html">Evaluating upstream communities</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="creating_a_new_repository.html">Creating a new repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="migrating_an_existing_repository.html">Migrating an existing repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="structure.html">Project structure</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="asciidoc.html">About AsciiDoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publishing.html">Publishing Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_to_the_framework.html">Contributing to the framework</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Community Collaboration Guide</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Community Collaboration Guide</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main" role="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="introduction.html" class="home-link is-current"></a>
+<nav class="crumbs" role="navigation" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Community Collaboration Guide</a></li>
+    <li class="crumb"><a href="introduction.html">About Community Documentation</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/community-collaboration-guide/modules/ROOT/pages/introduction.adoc"></a></div>
+</div>
+<article class="doc">
+<div class="sect1">
+<h2 id="ccg-introduction"><a class="anchor" href="#ccg-introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This guide has been provided by <a href="https://www.redhat.com/" target="_blank" rel="noopener">Red Hat</a> to assist enterprise projects in collaborating with upstream communities on documentation. For Red Hat, this guide provides tips for evaluating a community to see if they are prepared for collaboration with an enterprise software team, communication guidelines, information about supported and unsupported tools, and guidelines for structuring git repositories.</p>
+</div>
+<div class="paragraph">
+<p>In addition to recommendations for Red Hat documentation teams, this guide provides best practices, templates, and content recommendations to upstream communities. These suggestions inform communities on how to prepare for Red Hat writers to collaborate on documentation.</p>
+</div>
+<div class="sect2">
+<h3 id="ccg-overview"><a class="anchor" href="#ccg-overview"></a>Overview</h3>
+<div class="paragraph">
+<p>Customer Content Services (CCS) is a Red Hat team responsible for producing documentation for Red Hat customers. Because all Red Hat products have an upstream, or open source community version, it makes sense for CCS to use these upstream resources in developing guides for customers. Many programs use pieces of upstream content in the downstream documentation. This framework defines best practices for single-streaming your documentation.</p>
+</div>
+<div class="paragraph">
+<p>In principle, single-streamed documentation will be worked on completely in the upstream and brought down to the Customer Portal wholesale. In some projects, this process eliminates the overhead of maintaining two separate repositories for documentation content. This framework guides you through the process necessary for deciding if a community is a viable single-stream partner, setting up your repositories, choosing the right tools, and more.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-contacts"><a class="anchor" href="#ccg-contacts"></a>Contacts</h3>
+<div class="paragraph">
+<p>Communicate with members of this community by signing up for our mailing list.  To sign up send an empty email to <a href="mailto:ccs-upstream-subscribe@redhat.com">ccs-upstream-subscribe@redhat.com</a>. If you later want to unsubscribe, send an empty email to <a href="mailto:ccs-upstream-unsubscribe@redhat.com">ccs-upstream-unsubscribe@redhat.com</a>.</p>
+</div>
+<div class="paragraph">
+<p>To report issues or request enhancements to the Community Collaboration Guide use the <a href="https://github.com/redhat-documentation/community-collaboration-guide/issues">GitHub issues tool</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This is a preview of the https://docs.aerogear.org website.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

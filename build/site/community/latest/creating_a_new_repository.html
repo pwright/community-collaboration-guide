@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script>
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	item.on('click', '', content, function(e) {
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		e.data.siblings('.content').addClass('hidden');
+		e.data.removeClass('hidden');
+	});
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+$(addBlockSwitches);    
+</script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Community Collaboration Guide</title>
+    <link rel="canonical" href="https://redhat-documentation.github.io/community/latest/creating_a_new_repository.html">
+    <meta name="generator" content="Antora 1.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://redhat-documentation.github.io">Community Collaboration Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/">Documentation Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">AeroGear SDK</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/android-sdk/latest/index.html">Android</a>
+            <a class="navbar-item" href="/ios/latest/index.html">iOS</a>
+            <a class="navbar-item" href="/cordova/latest/index.html">Cordova</a>
+            <a class="navbar-item" href="/xamarin-sdk/latest/index.html">Xamarin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Mobile Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/custom/latest/index.html">Custom Runtime Connector</a>
+            <a class="navbar-item" href="/push/latest/index.html">Unified Push</a>
+            <a class="navbar-item" href="/keycloak/latest/index.html">Auth</a>       
+            <a class="navbar-item" href="/metrics/latest/index.html">Metrics</a>
+            <a class="navbar-item" href="/build/latest/index.html">CI/CD</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="community" data-version="latest">
+  <aside class="navigation" role="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Community Collaboration Guide</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">About Community Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_upstream.html">Contributing Upstream</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="community_evaluation.html">Evaluating upstream communities</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="creating_a_new_repository.html">Creating a new repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="migrating_an_existing_repository.html">Migrating an existing repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="structure.html">Project structure</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="asciidoc.html">About AsciiDoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publishing.html">Publishing Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_to_the_framework.html">Contributing to the framework</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Community Collaboration Guide</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Community Collaboration Guide</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main" role="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="introduction.html" class="home-link"></a>
+<nav class="crumbs" role="navigation" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Community Collaboration Guide</a></li>
+    <li class="crumb"><a href="creating_a_new_repository.html">Creating a new repository</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/community-collaboration-guide/modules/ROOT/pages/creating_a_new_repository.adoc"></a></div>
+</div>
+<article class="doc">
+<div class="sect1">
+<h2 id="ccg-create-repo"><a class="anchor" href="#ccg-create-repo"></a>Creating a new repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you are working on a completely new open source project you might need to create a git repository from scratch.  A common option for creating a public repository is to use <a href="http://github.com">GitHub</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="ccg-create-repo-setup"><a class="anchor" href="#ccg-create-repo-setup"></a>Setting up the repository</h3>
+<div class="sect3">
+<h4 id="ccg-create-repo-setup-prereq"><a class="anchor" href="#ccg-create-repo-setup-prereq"></a>Prerequisites</h4>
+<div class="paragraph">
+<p>To create a repository on GitHub you will first need to have an account.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ccg-create-repo-setup-procedure"><a class="anchor" href="#ccg-create-repo-setup-procedure"></a>Procedure</h4>
+<div class="paragraph">
+<p>There are several ways to create a new repository in GitHub. One procedure is to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to GitHub</p>
+</li>
+<li>
+<p>Click the <strong>plus (+) sign</strong> in the top right</p>
+</li>
+<li>
+<p>Choose <strong>New Repository</strong></p>
+</li>
+<li>
+<p>Provide a <strong>Repository Name</strong>, <strong>Description</strong>, and choose if the repository is <strong>Public</strong> or <strong>Private</strong></p>
+</li>
+<li>
+<p>Click <strong>Create Repository</strong> to finalize the process</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ccg-create-repo-synch-methods"><a class="anchor" href="#ccg-create-repo-synch-methods"></a>Synchronization methods</h4>
+<div class="paragraph">
+<p>The following synchronization methods are currently recommended:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#ccg-create-repo-synch-batchcommit">Batch Commit</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ccg-create-repo-synch-batchcommit"><a class="anchor" href="#ccg-create-repo-synch-batchcommit"></a>Batch commit synchronization method</h4>
+<div class="sect4">
+<h5 id="ccg-create-repo-synch-batchcommit-when"><a class="anchor" href="#ccg-create-repo-synch-batchcommit-when"></a>When to use this approach</h5>
+<div class="paragraph">
+<p>The batch commit process is a good approach to use when you need to incorporate upstream content into product documentation and the product contains a good deal of additional product-specific content.
+In other words, when the upstream content is included as a <em>subset</em> of the product documentation.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ccg-create-repo-synch-batchcommit-prereq"><a class="anchor" href="#ccg-create-repo-synch-batchcommit-prereq"></a>Prerequisites</h5>
+<div class="paragraph">
+<p>The batch commit method assumes that your upstream repository is hosted on GitHub and the machine where you run the batch commit script has the following utilities installed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>curl</code></p>
+</li>
+<li>
+<p><code>zip</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ccg-create-repo-synch-batchcommit-dir"><a class="anchor" href="#ccg-create-repo-synch-batchcommit-dir"></a>Directory structure</h5>
+<div class="paragraph">
+<p>The batch commit example described here assumes that you have a book directory, <code>my-sample-book</code>, structured as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>my-sample-book/
+|__ fetch-upstream.sh
+|__ docinfo.xml
+|__ master.adoc
+|__ topics/
+|__ upstream/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where <code>fetch-upstream.sh</code> is the batch commit script (for details, see <a href="#ccg-create-repo-synch-batchcommit-script">Sample batch commit script</a>), and <code>upstream</code> is a subdirectory reserved for the upstream content.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ccg-create-repo-synch-batchcommit-workflow"><a class="anchor" href="#ccg-create-repo-synch-batchcommit-workflow"></a>Workflow</h5>
+<div class="paragraph">
+<p>Given that you already have a batch commit script, <code>fetch-upstream.sh</code>, the workflow for synchronizing content from the upstream repository is as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Pull down the latest content from the upstream repository and put the downloaded files in the <code>upstream/</code> subdirectory:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ ./fetch-upstream.sh</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Inspect the downloaded content (for example, using <code>git diff</code>) to check for new files, restructured content, and so on.
+If necessary, edit the book file, <code>master.adoc</code>, to incorporate new content.</p>
+</li>
+<li>
+<p>Add and commit the downloaded content:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ git add upstream
+$ git commit -m "Synched content from upstream"</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ccg-create-repo-synch-batchcommit-script"><a class="anchor" href="#ccg-create-repo-synch-batchcommit-script"></a>Sample batch commit script</h5>
+<div class="paragraph">
+<p>The batch commit script, <code>fetch-upstream.sh</code>, is a simple <code>bash</code> script that pulls down the latest upstream content, copying the relevant upstream files into the <code>upstream</code> subdirectory.
+The script exploits a particular feature of GitHub, whereby GitHub provides a downloadable archive file containing the working tree for any branch in the repository.
+The archive file has a snapshot of the <em>latest</em> content in a particular branch and thus provides an ideal basis for synchronizing content downstream.</p>
+</div>
+<div class="paragraph">
+<p>To see how his works, consider the following sample <code>fetch-upstream.sh</code> script developed for synchronizing the contents of the <em>Apache Camel Component Reference</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>#!/bin/sh
+
+branch=camel-2.18.x <i class="conum" data-value="1"></i><b>(1)</b>
+
+echo "info: fetching upstream content from branch: $branch"
+echo
+
+# -L = follow redirects
+curl -L -o $branch.zip https://github.com/apache/camel/archive/$branch.zip <i class="conum" data-value="2"></i><b>(2)</b>
+
+# -o = overwrite, -j = flatten directory structure, -q = quiet
+unzip -qjo -d upstream $branch.zip camel-$branch/components/camel-*/src/main/docs/*.adoc <i class="conum" data-value="3"></i><b>(3)</b>
+unzip -qjo -d upstream/images $branch.zip camel-$branch/components/camel-*/src/main/docs/*.png
+unzip -qjo -d upstream $branch.zip camel-$branch/camel-core/src/main/docs/*-component.adoc
+
+rm $branch.zip <i class="conum" data-value="4"></i><b>(4)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Set the <code>branch</code> variable to the name of the upstream branch.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Download the archive (<code>.zip</code>) file from GitHub, which includes a snapshot of the latest content from the <code>$branch</code> branch and store it locally as the file, <code>$branch.zip</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Extract the relevant documentation files from the archive and put them into the <code>upstream</code> subdirectory.
+Note that the <code>unzip</code> command is a remarkably flexible tool for extracting content from the archive.
+In this particular case, the AsciiDoc files are embedded in the Java code base and scattered across hundreds of subdirectories.
+But thanks to the globbing capabilities of <code>unzip</code>, it takes only a few commands to find and extract all the relevant files.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Clean up, by removing the downloaded archive, <code>$branch.zip</code>.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is not necessary for the script to figure out whether specific files have changed or not.
+Git automatically detects when a file has changed based on the file&#8217;s content, not its creation time.
+So Git ignores any files with the same content as before.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ccg-create-repo-synch-batchcommit-procon"><a class="anchor" href="#ccg-create-repo-synch-batchcommit-procon"></a>Pros and cons</h5>
+<div class="paragraph">
+<p>Given the simplicity of the batch commit script, you might get the impression that it is not as powerful as other approaches.
+But if you compare it with a mechanism that provides similar functionality&#8201;&#8212;&#8201;for example, Git <em>submodules</em>&#8201;&#8212;&#8201;it measures up well.
+For example, <a href="#table-batch-commit-git-submodule">Comparison of batch commit and git submodule</a> makes a point by point comparison of the batch commit process against the Git submodule process.</p>
+</div>
+<table id="table-batch-commit-git-submodule" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Comparison of batch commit and git submodule</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">(Negative) Feature</th>
+<th class="tableblock halign-left valign-top">Batch commit</th>
+<th class="tableblock halign-left valign-top">Git submodule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contributor needs to know special processes or commands?</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>No</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>Yes</em></p>
+</div>
+<div class="paragraph">
+<p>For example, <code>git submodule update</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requires customization of publication toolchain?</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>No</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>Yes</em></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Causes repository bloat?</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>No</em></p>
+</div>
+<div class="paragraph">
+<p>Only the required files are committed to the downstream repository.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>Yes</em></p>
+</div>
+<div class="paragraph">
+<p>Complete working tree and complete history are downloaded.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requires maintenance to keep in sync?</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>Yes</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>Yes</em></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This is a preview of the https://docs.aerogear.org website.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

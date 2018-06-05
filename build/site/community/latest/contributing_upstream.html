@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script>
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	item.on('click', '', content, function(e) {
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		e.data.siblings('.content').addClass('hidden');
+		e.data.removeClass('hidden');
+	});
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+$(addBlockSwitches);    
+</script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Community Collaboration Guide</title>
+    <link rel="canonical" href="https://redhat-documentation.github.io/community/latest/contributing_upstream.html">
+    <meta name="generator" content="Antora 1.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://redhat-documentation.github.io">Community Collaboration Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/">Documentation Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">AeroGear SDK</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/android-sdk/latest/index.html">Android</a>
+            <a class="navbar-item" href="/ios/latest/index.html">iOS</a>
+            <a class="navbar-item" href="/cordova/latest/index.html">Cordova</a>
+            <a class="navbar-item" href="/xamarin-sdk/latest/index.html">Xamarin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Mobile Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/custom/latest/index.html">Custom Runtime Connector</a>
+            <a class="navbar-item" href="/push/latest/index.html">Unified Push</a>
+            <a class="navbar-item" href="/keycloak/latest/index.html">Auth</a>       
+            <a class="navbar-item" href="/metrics/latest/index.html">Metrics</a>
+            <a class="navbar-item" href="/build/latest/index.html">CI/CD</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="community" data-version="latest">
+  <aside class="navigation" role="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Community Collaboration Guide</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">About Community Documentation</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="contributing_upstream.html">Contributing Upstream</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="community_evaluation.html">Evaluating upstream communities</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="creating_a_new_repository.html">Creating a new repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="migrating_an_existing_repository.html">Migrating an existing repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="structure.html">Project structure</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="asciidoc.html">About AsciiDoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publishing.html">Publishing Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_to_the_framework.html">Contributing to the framework</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Community Collaboration Guide</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Community Collaboration Guide</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main" role="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="introduction.html" class="home-link"></a>
+<nav class="crumbs" role="navigation" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Community Collaboration Guide</a></li>
+    <li class="crumb"><a href="contributing_upstream.html">Contributing Upstream</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/community-collaboration-guide/modules/ROOT/pages/contributing_upstream.adoc"></a></div>
+</div>
+<article class="doc">
+<div class="sect1">
+<h2 id="ccg-contributing-upstream"><a class="anchor" href="#ccg-contributing-upstream"></a>Contributing upstream</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is a set of guidelines for  getting involved in an upstream open source documentation project.
+It is geared primarily towards people working for a downstream distributor,
+although many of the guidelines are useful for everyone.</p>
+</div>
+<div class="paragraph">
+<p>The first step to get involved is to join the conversation.
+Open source teams communicate in many different ways, including mailing lists, IRC, Slack, and Telegram.
+Find out where documentation conversations are happening and join.
+For most projects, there is a documentation-specific mailing list.
+Sometimes, there is just a single development mailing list that includes documentation work.
+When you join a mailing list, it&#8217;s a good idea to send an email introducing yourself.
+Tell the team who you are and what ways you&#8217;re interesting in helping.</p>
+</div>
+<div class="paragraph">
+<p>When trying to introduce changes, it is important not to come across as judgmental or condescending.
+An email that paints a team&#8217;s work as wrong or broken will often be ignored,
+or it will cause people to become very defensive.
+Instead, point out the positive and try to show how it can be incrementally improved.</p>
+</div>
+<div class="paragraph">
+<p>Be curious and show that you&#8217;re listening.
+If there&#8217;s something you don&#8217;t think is optimal, try to understand why it is the way it is.
+"This isn&#8217;t the right way to do things" rarely effects positive change.
+"I&#8217;m trying to understand why we do things this way" is a better way of sparking constructive conversation.</p>
+</div>
+<div class="paragraph">
+<p>You may have specific ideas of how you want to improve something, but when working with the community,
+you have to be prepared to adapt your ideas to what others are saying.
+Every project has unique objectives, constraints, history, and culture. One size rarely fits all.</p>
+</div>
+<div class="paragraph">
+<p>When proposing changes, focus on how they will benefit the project and the community,
+rather than how they will benefit you or your employer.
+Commercian distributions have business needs, and these affect what they would like to see in upstream projects.
+But their business needs aren&#8217;t necessarily interesting or relevant to the project.</p>
+</div>
+<div class="paragraph">
+<p>Proposals to change things carry more weight when somebody is offering to do the work.
+You may have heard responses like "show me the code" or "patches welcome".
+If you want something improved, show that you&#8217;re willing to put in some of the work.
+If you&#8217;re not sure how you can best help, ask the community.
+"How can I help?" is a great question.
+If it involves technical work you&#8217;re not comfortable with, find somebody who can help.</p>
+</div>
+<div class="paragraph">
+<p>Sometimes it can be difficult for a newcomer to propose new ideas in an established community.
+If you&#8217;re uncomfortable, or if you&#8217;re not making progress,
+try to find somebody more established in the community to talk to.
+Remember that the same advice applies when talking to an individual.
+Be positive and curious. Listen and understand. Offer to help.</p>
+</div>
+<div class="paragraph">
+<p>Finally, be prepared to accept that things will not always go the way you want.
+One of the defining characteristics of a community is that it makes its own decisions.
+That&#8217;s the reality of being good open source citizens.</p>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This is a preview of the https://docs.aerogear.org website.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

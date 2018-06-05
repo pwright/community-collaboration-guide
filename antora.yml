@@ -1,6 +1,6 @@
 name: community
 title: Community Collaboration Guide
 version: 'latest'
-start_ROOT: ROOT:index.adoc
+start_ROOT: ROOT:introduction.adoc
 nav:
 - modules/ROOT/nav.adoc

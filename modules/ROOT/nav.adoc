@@ -1,19 +1,19 @@
-* xref:introduction.adoc[]
+* xref:introduction.adoc[About Community Documentation]
 
-* xref:contributing_upstream.adoc[]
+* xref:contributing_upstream.adoc[Contributing Upstream]
 
-* xref:community_evaluation.adoc[]
+* xref:community_evaluation.adoc[Evaluating upstream communities]
 
-* xref:creating_a_new_repository.adoc[]
+* xref:creating_a_new_repository.adoc[Creating a new repository]
 
-* xref:migrating_an_existing_repository.adoc[]
+* xref:migrating_an_existing_repository.adoc[Migrating an existing repository]
 
-* xref:structure.adoc[]
+* xref:structure.adoc[Project structure]
 
-* xref:asciidoc.adoc[]
+* xref:asciidoc.adoc[About AsciiDoc]
 
-* xref:building.adoc[]
+* xref:building.adoc[Building Content]
 
-* xref:publishing.adoc[]
+* xref:publishing.adoc[Publishing Content]
 
-* xref:contributing_to_the_framework.adoc[]
+* xref:contributing_to_the_framework.adoc[Contributing to the framework]

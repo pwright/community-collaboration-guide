@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script>
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	item.on('click', '', content, function(e) {
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		e.data.siblings('.content').addClass('hidden');
+		e.data.removeClass('hidden');
+	});
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+$(addBlockSwitches);    
+</script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Community Collaboration Guide</title>
+    <link rel="canonical" href="https://redhat-documentation.github.io/community/latest/asciidoc.html">
+    <meta name="generator" content="Antora 1.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://redhat-documentation.github.io">Community Collaboration Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/">Documentation Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">AeroGear SDK</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/android-sdk/latest/index.html">Android</a>
+            <a class="navbar-item" href="/ios/latest/index.html">iOS</a>
+            <a class="navbar-item" href="/cordova/latest/index.html">Cordova</a>
+            <a class="navbar-item" href="/xamarin-sdk/latest/index.html">Xamarin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Mobile Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/custom/latest/index.html">Custom Runtime Connector</a>
+            <a class="navbar-item" href="/push/latest/index.html">Unified Push</a>
+            <a class="navbar-item" href="/keycloak/latest/index.html">Auth</a>       
+            <a class="navbar-item" href="/metrics/latest/index.html">Metrics</a>
+            <a class="navbar-item" href="/build/latest/index.html">CI/CD</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="community" data-version="latest">
+  <aside class="navigation" role="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Community Collaboration Guide</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">About Community Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_upstream.html">Contributing Upstream</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="community_evaluation.html">Evaluating upstream communities</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="creating_a_new_repository.html">Creating a new repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="migrating_an_existing_repository.html">Migrating an existing repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="structure.html">Project structure</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="asciidoc.html">About AsciiDoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publishing.html">Publishing Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_to_the_framework.html">Contributing to the framework</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Community Collaboration Guide</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Community Collaboration Guide</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main" role="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="introduction.html" class="home-link"></a>
+<nav class="crumbs" role="navigation" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Community Collaboration Guide</a></li>
+    <li class="crumb"><a href="asciidoc.html">About AsciiDoc</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/community-collaboration-guide/modules/ROOT/pages/asciidoc.adoc"></a></div>
+</div>
+<article class="doc">
+<div class="sect1">
+<h2 id="asciidoc"><a class="anchor" href="#asciidoc"></a>AsciiDoc</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://asciidoc.org/" target="_blank" rel="noopener">AsciiDoc</a> is a text document format that you can use to write documentation, articles, books, web pages, and blogs.
+AsciiDoc files can be translated to many formats including HTML, PDF, EPUB, and man page.</p>
+</div>
+<div class="paragraph">
+<p>The Red Hat documentation team uses <a href="http://asciidoctor.org/" target="_blank" rel="noopener">Asciidoctor</a> as part of the publishing toolchain.</p>
+</div>
+<div class="sect2">
+<h3 id="ccg-asciidoc-attributes"><a class="anchor" href="#ccg-asciidoc-attributes"></a>AsciiDoc attributes</h3>
+<div class="paragraph">
+<p>AsciiDoc attributes are variables you can use in common files to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>avoid hard-coding brand-specific information,</p>
+</li>
+<li>
+<p>share content between multiple brands more easily.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To use attributes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Set them in the relevant <em>brand</em> AsciiDoc attribute file in the <code>common</code> directory.</p>
+</li>
+<li>
+<p>Include the <em>brand</em> AsciiDoc attribute file in the <code>master.adoc</code> file for the relevant document:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">include::attributes.adoc[]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Replace brand-specific terms with the variable names that you have defined, and use <code>ifdef</code> statements to mark blocks of brand-specific content.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Common AsciiDoc attributes include product name, abbreviated product name, and product version.
+For more information about attributes  and <code>ifdef</code> statements, see <a href="http://asciidoctor.org/docs/user-manual/#attributes" target="_blank" rel="noopener">Attributes</a> and <a href="http://asciidoctor.org/docs/user-manual/#conditional-preprocessor-directives" target="_blank" rel="noopener">Conditional Preprocessor Directives</a> in the <em>Asciidoctor User Guide</em>.</p>
+</div>
+<div class="paragraph">
+<p>The example below creates attributes for the <strong>Community Documentation</strong> brand.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new <code>community.adoc</code> file in the <code>common/attributes/</code> directory.</p>
+</li>
+<li>
+<p>Open the file, and add your attribute mappings, each entry on a new line:</p>
+<div class="listingblock">
+<div class="content">
+<pre>:product-name: Community Documentation
+:product-name_short: Community
+:product-name_abbr: cd
+:product-version: 1.0</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Save the file.</p>
+</li>
+<li>
+<p>In each <code><em>doc-Guide_Name</em>/community</code> directory, edit the <code>master.adoc</code> file.
+Include the attribute file, and add the variable name you want to use to identify <code>ifdef</code> statements:</p>
+<div class="listingblock">
+<div class="content">
+<pre>include::common/attributes/community.adoc
+
+:community:</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Anywhere in a common topic file that you would normally use the product name or version, use the following values instead:</p>
+<div class="listingblock">
+<div class="content">
+<pre>{product-name}
+{product-name_short}
+{product-name_abbr}
+{product-version}</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Anywhere in a common topic file that you need a section of text to appear only in the <strong>Community Documentation</strong> version of the guide, use an ifdef statement:</p>
+<div class="listingblock">
+<div class="content">
+<pre>// An ifdef for an entire sentence or paragraph
+ ifdef::community[]
+ This is a sentence that applies only to the Community Documentation version of the document.
+ endif::community[]
+
+// An ifdef for an inline reference, which includes an entry for another brand
+ See
+ ifdef::community[the Community Standards Guide.]
+ ifdef::productx[the Product X Conventions Guide.]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ifdef</code> statement must be at the start of a new line, even for inline references.
+When the <strong>Community Documentation</strong> version of the guide is rendered, the content inside the <code>ifdef</code> statements for <code>community</code> will appear, and the content inside the <code>ifdef</code> statements for <code>productx</code> will be excluded.
+Any content not included inside an <code>ifdef</code> statement will appear in rendered guides for all brands.</p>
+</div>
+</li>
+<li>
+<p>Render the guide to verify that your attributes are appearing correctly.
+Navigate to the directory containing the <code>master.adoc</code>, and use:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">asciidoctor compile</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-attributes-to-links"><a class="anchor" href="#ccg-attributes-to-links"></a>Single-sourcing URLs using attributes</h3>
+<div class="paragraph">
+<p>In addition to storing product names and versions, attributes can be used to store book-local and cross-book links for your guides.
+Doing this allows you to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>construct consistently structured and predictable link URLs (especially when combined with explicit ID anchors),</p>
+</li>
+<li>
+<p>single-source your link URLs, making updates easier,</p>
+</li>
+<li>
+<p>eliminate the risk of introducing errors when updating your links.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To store a relative link as an attribute, you must define it in the:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">:link-getting-started: /docs/getting-strated.html</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Attributes can also store external link URLs, allowing you to update them without breaking any links in your guide.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-asciidoc hljs" data-lang="asciidoc">:link-community-docs: https://docs.example.com/guides/community.html</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use the variable in a link macro.
+The variable will automatically resolve to the URL stored in the attribute when you build your documents.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-asciidoc hljs" data-lang="asciidoc">link:{link-community-docs}#introduction[Community Documentation Introduction]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To force your links to open in a new window:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Set the <code>linkattrs</code> attribute in your <code>attributes.adoc</code> file:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">:linkattrs:</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Use the caret <code>^</code> character to enforce the <code>target=_blank</code> HTML attribute for the link anchor.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-asciidoc hljs" data-lang="asciidoc">link:{link-community-docs}[Community Documentation^]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Alternatively, you can set the the AsciiDoc attribute explicitly:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-asciidoc hljs" data-lang="asciidoc">link:{link-community-docs}[Community Documentation, window="_blank"]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When clicked, the link will always open in a new tab.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-previewing-your-content"><a class="anchor" href="#ccg-previewing-your-content"></a>Previewing your content</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The AsciiDoctor documentation has a chapter on <a href="http://asciidoctor.org/docs/editing-asciidoc-with-live-preview/" target="_blank" rel="noopener">Editing AsciiDoc with live preview</a>.</p>
+</li>
+<li>
+<p>The Atom editor has a <a href="https://atom.io/packages/asciidoc-preview" target="_blank" rel="noopener">package to render a live preview</a> of your AsciiDoc source, which allows you to see your markup rendered as you type it.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-asciidoc-converter"><a class="anchor" href="#ccg-asciidoc-converter"></a>AsciiDoc converters</h3>
+<div class="paragraph">
+<p>If your project is not already written in AsciiDoc and you want to migrate from Markdown or another markup language, there are a variety of conversion tools available.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Atom editor has a <a href="https://atom.io/packages/markdown-to-asciidoc" target="_blank" rel="noopener">package to convert Markdown to AsciiDoc</a>.</p>
+</li>
+<li>
+<p>There is a plugin to <a href="https://chrome.google.com/webstore/detail/asciidoc-processor/eghlmnhjljbjodpeehjjcgfcjegcfbhk?hl=en" target="_blank" rel="noopener">convert Google docs to AsciiDoc</a>.</p>
+</li>
+<li>
+<p><a href="https://pandoc.org/" target="_blank" rel="noopener">Pandoc</a> can convert between a large number of different markup and file formats including DocBook, Emacs Org-Mode, EPUB, HTML, LaTeX, LibreOffice ODT, Markdown, MediaWiki markup, Microsoft Word docx, OPML, reStructuredText, textile, TWiki markup, and Txt2Tags.</p>
+</li>
+<li>
+<p><a href="https://github.com/lruzicka/rst2adoc/" target="_blank" rel="noopener">rst2adoc</a> is an AsciiDoc builder and writer for Sphinx that allows you to convert reStructuredText (RST) files to AsciiDoc using the Sphinx build system.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This is a preview of the https://docs.aerogear.org website.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

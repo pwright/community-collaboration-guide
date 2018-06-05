@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script>
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	item.on('click', '', content, function(e) {
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		e.data.siblings('.content').addClass('hidden');
+		e.data.removeClass('hidden');
+	});
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+$(addBlockSwitches);    
+</script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Community Collaboration Guide</title>
+    <link rel="canonical" href="https://redhat-documentation.github.io/community/latest/publishing.html">
+    <meta name="generator" content="Antora 1.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://redhat-documentation.github.io">Community Collaboration Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/">Documentation Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">AeroGear SDK</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/android-sdk/latest/index.html">Android</a>
+            <a class="navbar-item" href="/ios/latest/index.html">iOS</a>
+            <a class="navbar-item" href="/cordova/latest/index.html">Cordova</a>
+            <a class="navbar-item" href="/xamarin-sdk/latest/index.html">Xamarin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Mobile Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/custom/latest/index.html">Custom Runtime Connector</a>
+            <a class="navbar-item" href="/push/latest/index.html">Unified Push</a>
+            <a class="navbar-item" href="/keycloak/latest/index.html">Auth</a>       
+            <a class="navbar-item" href="/metrics/latest/index.html">Metrics</a>
+            <a class="navbar-item" href="/build/latest/index.html">CI/CD</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="community" data-version="latest">
+  <aside class="navigation" role="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Community Collaboration Guide</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">About Community Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_upstream.html">Contributing Upstream</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="community_evaluation.html">Evaluating upstream communities</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="creating_a_new_repository.html">Creating a new repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="migrating_an_existing_repository.html">Migrating an existing repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="structure.html">Project structure</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="asciidoc.html">About AsciiDoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building Content</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="publishing.html">Publishing Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_to_the_framework.html">Contributing to the framework</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Community Collaboration Guide</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Community Collaboration Guide</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main" role="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="introduction.html" class="home-link"></a>
+<nav class="crumbs" role="navigation" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Community Collaboration Guide</a></li>
+    <li class="crumb"><a href="publishing.html">Publishing Content</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/community-collaboration-guide/modules/ROOT/pages/publishing.adoc"></a></div>
+</div>
+<article class="doc">
+<div class="sect1">
+<h2 id="ccg-publishing-content"><a class="anchor" href="#ccg-publishing-content"></a>Publishing content</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To be useful, content must be published to a public location that end users can access. There are multiple ways to publish. Some commonly used tools are described in this section.</p>
+</div>
+<div class="sect2">
+<h3 id="ccg-asciibinder"><a class="anchor" href="#ccg-asciibinder"></a>AsciiBinder</h3>
+<div class="paragraph">
+<p>In addition to providing a system to structure and maintain documentation for multiple brands using a single repository, AsciiBinder also provides the ability to preview and package documentation as a set of HTML files that you can publish on a website.</p>
+</div>
+<div class="paragraph">
+<p>Run the following command to build a preview of the documentation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ asciibinder build</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of this command is saved in the <code>&lt;docs_repo_dir&gt;/_preview/&lt;distro&gt;/&lt;branch_dir_name&gt;</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>Run the following command to package the documentation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">$ asciibinder package</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output of this command is saved in the <code>&lt;docs_repo_dir&gt;/_package/&lt;distro&gt;/&lt;branch_dir_name&gt;</code> directory. Each sub-directory in the <code>_package</code> represents the website content for a single brand, and can be copied to a hosting server as is.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Reference</dt>
+<dd>
+<p><a href="http://asciibinder.org/latest/guides/user_guide.html#building-the-docs" target="_blank" rel="noopener">http://asciibinder.org/latest/guides/user_guide.html#building-the-docs</a></p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-travis-container"><a class="anchor" href="#ccg-travis-container"></a>Using Travis CI and Asciidoctor container to publish to GitHub Pages</h3>
+<div class="paragraph">
+<p>This publishing mechanism uses a single configuration file <code>.travis.yml</code> and is based on a <strong>GitHub</strong> + <strong>Travis CI</strong> + <strong>Asciidoctor container</strong> + <strong>GitHub Pages</strong> toolchain, an idea taken from <a href="https://docs.travis-ci.com/user/deployment/pages/" target="_blank" rel="noopener">GitHub Pages Deployment</a>.</p>
+</div>
+<div class="paragraph">
+<p>Each commit pushed to a pre-configured branch (such as <code>master</code>, <code>devel</code>, or <code>stable</code>) containing a <code>.travis.yml</code> automatically triggers a document build, so you do not need an extra tool installed locally in order to publish an update to the document. When the Asciidoctor container running in Travis CI successfully finishes the build, Travis CI pushes the resulting HTML (and, optionally, PDF) to a deployment branch (such as <code>gh-pages</code> or <code>publish</code>), and GitHub Pages then publishes the HTML (and PDF) from the deployment branch to the desired URL (for instance, <code>my-project.github.io/my-document</code>).</p>
+</div>
+<div class="paragraph">
+<p>This publishing mechanism is used to publish the Community Collaboration Guide from <a href="https://github.com/redhat-documentation/community-collaboration-guide" target="_blank" rel="noopener">https://github.com/redhat-documentation/community-collaboration-guide</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="ccg-travisyml"><a class="anchor" href="#ccg-travisyml"></a>Sample .travis.yml</h4>
+<div class="paragraph">
+<p>Below is a sample <code>.travis.yml</code> file that must be placed in the root directory of your branch, from which you want to publish to GitHub Pages.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="nowrap">sudo: required
+
+branches:
+  only:
+  - master # Branch from which to publish
+
+services:
+  - docker
+
+before_install:
+  - mkdir -p output
+  - docker pull asciidoctor/docker-asciidoctor
+
+script:
+  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor --destination-dir=/documents/output --out-file=index.html community/master.adoc
+  - docker run -v $TRAVIS_BUILD_DIR:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf --destination-dir=/documents/output --out-file=community-collaboration-guide.pdf community/master.adoc
+
+after_error:
+  - docker logs asciidoc-to-html
+  - docker logs asciidoc-to-pdf
+
+after_failure:
+  - docker logs asciidoc-to-html
+  - docker logs asciidoc-to-pdf
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $TOKEN # Set in travis-ci.org dashboard
+  local_dir: output
+  on:
+    branch: master</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This is a preview of the https://docs.aerogear.org website.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

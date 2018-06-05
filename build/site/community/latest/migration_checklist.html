@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script>
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	item.on('click', '', content, function(e) {
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		e.data.siblings('.content').addClass('hidden');
+		e.data.removeClass('hidden');
+	});
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+$(addBlockSwitches);    
+</script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Community Collaboration Guide</title>
+    <link rel="canonical" href="https://redhat-documentation.github.io/community/latest/migration_checklist.html">
+    <meta name="generator" content="Antora 1.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://redhat-documentation.github.io">Community Collaboration Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/">Documentation Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">AeroGear SDK</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/android-sdk/latest/index.html">Android</a>
+            <a class="navbar-item" href="/ios/latest/index.html">iOS</a>
+            <a class="navbar-item" href="/cordova/latest/index.html">Cordova</a>
+            <a class="navbar-item" href="/xamarin-sdk/latest/index.html">Xamarin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Mobile Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/custom/latest/index.html">Custom Runtime Connector</a>
+            <a class="navbar-item" href="/push/latest/index.html">Unified Push</a>
+            <a class="navbar-item" href="/keycloak/latest/index.html">Auth</a>       
+            <a class="navbar-item" href="/metrics/latest/index.html">Metrics</a>
+            <a class="navbar-item" href="/build/latest/index.html">CI/CD</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="community" data-version="latest">
+  <aside class="navigation" role="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Community Collaboration Guide</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">About Community Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_upstream.html">Contributing Upstream</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="community_evaluation.html">Evaluating upstream communities</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="creating_a_new_repository.html">Creating a new repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="migrating_an_existing_repository.html">Migrating an existing repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="structure.html">Project structure</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="asciidoc.html">About AsciiDoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publishing.html">Publishing Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_to_the_framework.html">Contributing to the framework</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Community Collaboration Guide</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Community Collaboration Guide</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main" role="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="introduction.html" class="home-link"></a>
+<nav class="crumbs" role="navigation" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/community-collaboration-guide/modules/ROOT/pages/migration_checklist.adoc"></a></div>
+</div>
+<article class="doc">
+<div class="sect2">
+<h3 id="migration-checklist"><a class="anchor" href="#migration-checklist"></a>Migration checklist</h3>
+<div class="paragraph">
+<p>The following is a basic checklist of considerations to make before migrating content from an existing downstream repository to an upstream repository. In principle, the content should be laid out in accordance with one of the structures outlined in <a href="#ccg-project-structure">Project Structure</a>.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Where will you submit the content?</dt>
+<dd>
+<p>Is there a dedicated upstream repository for documentation, or will the content be managed alongside the code? Alternatively, does a new upstream repository need to be created for documentation, and if so, who will perform this work?</p>
+</dd>
+<dt class="hdlist1">How will you submit the content?</dt>
+<dd>
+<p>When the content is ready, how should it be submitted to the upstream community? Can a standard pull request be submitted that adds all the content at the same time, or is there a different process?</p>
+</dd>
+<dt class="hdlist1">When will you submit the content?</dt>
+<dd>
+<p>Can the content be migrated at any time, or should it be migrated in line with an existing milestone such as an upstream community release? Who should be notified when the content has been migrated, and when will any new workflows commence? How will changes to the documentation be handled in the time after a pull request to submit the content has been created and before it has been accepted?</p>
+</dd>
+<dt class="hdlist1">Do you have the required permissions?</dt>
+<dd>
+<p>The members of the downstream documentation team must be granted the permissions and roles to work on the content in the upstream repository before any new workflows commence. Before requesting that any permissions or roles be granted, all members of the downstream documentation team must create an account on the appropriate website, if required.</p>
+</dd>
+<dt class="hdlist1">Have all brand-specific references been conditionalized?</dt>
+<dd>
+<p>If there are any references to resources that are inappropriate for or cannot be accessed by the upstream community, such as support statements or links to content on the Customer Portal, this content must be conditionalized so that it only appears in the downstream version of that content. Likewise, if there are any references to resources that are inappropriate for the end users of the downstream documentation, such as links to community documentation, this content must be conditionalized so that it only appears in the upstream version of that content.</p>
+</dd>
+<dt class="hdlist1">Have all product names and versions been converted to attributes?</dt>
+<dd>
+<p>If there are any references to product names or product versions that are specific to the downstream community or upstream community, and have an equivalent in the other, ensure they are replaced with attributes so that the correct product names and product versions will be input when the content is built. See <a href="#ccg-asciidoc-attributes">AsciiDoc Attributes</a> for more information.</p>
+</dd>
+<dt class="hdlist1">How will you manage existing titles?</dt>
+<dd>
+<p>Is there any content in the upstream repository that must be retired or included in the new content being added? If so, a decision must be made as to whether this content will be kept separate or whether it will be converted into a similar format as the other content.</p>
+</dd>
+<dt class="hdlist1">What license is applied to the content?</dt>
+<dd>
+<p>If there is any existing content in the upstream repository, what license is applied to that content? If the same license is applied to all content in an upstream repository or to all rendered documentation on a community website, it is important to discuss how and where this license is applied, and to discuss whether any conditions would prevent that content from being used by both the upstream community and downstream documentation team.</p>
+</dd>
+<dt class="hdlist1">What markup language is required?</dt>
+<dd>
+<p>If there is any existing content in the upstream repository, what markup language was used to write that content, and what rendering and publication mechanism is used to convert it into readable documentation? Is it possible to use AsciiDoc as the markup language, and if not, how can content to be synchronized with the downstream repository be converted from the current markup language into AsciiDoc?</p>
+</dd>
+<dt class="hdlist1">How will you synchronize content?</dt>
+<dd>
+<p>After the content has been migrated to the upstream repository, how will that content be synchronized with the downstream repository? Do any titles exist only in the upstream or in the downstream? If so, consider using the <a href="#ccg-create-repo-synch-batchcommit">Batch Commit</a> method method to synchronize only selected content. If all content in the upstream repository can be synchronized as is with the downstream repository, consider pushing all branches from the upstream repository to the downstream repository as a second remote. If the method used to synchronize content affects the way the content is to be managed in the upstream community (for example, references to downstream-only resources must be included, even if conditionalized), the potential impact must be discussed with the community.</p>
+</dd>
+</dl>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This is a preview of the https://docs.aerogear.org website.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>

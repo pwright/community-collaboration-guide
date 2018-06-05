@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script>
+function addBlockSwitches() {
+	$('.primary').each(function() {
+		primary = $(this);
+		createSwitchItem(primary, createBlockSwitch(primary)).item.addClass("selected");
+		primary.children('.title').remove();
+	});
+	$('.secondary').each(function(idx, node) {
+		secondary = $(node);
+		primary = findPrimary(secondary);
+		switchItem = createSwitchItem(secondary, primary.children('.switch'));
+		switchItem.content.addClass('hidden');
+		findPrimary(secondary).append(switchItem.content);
+		secondary.remove();
+	});
+}
+
+function createBlockSwitch(primary) {
+	blockSwitch = $('<div class="switch"></div>');
+	primary.prepend(blockSwitch);
+	return blockSwitch;
+}
+
+function findPrimary(secondary) {
+	candidate = secondary.prev();
+	while (!candidate.is('.primary')) {
+		candidate = candidate.prev();
+	}
+	return candidate;
+}
+
+function createSwitchItem(block, blockSwitch) {
+	blockName = block.children('.title').text();
+	content = block.children('.content').first().append(block.next('.colist'));
+	item = $('<div class="switch--item">' + blockName + '</div>');
+	item.on('click', '', content, function(e) {
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		e.data.siblings('.content').addClass('hidden');
+		e.data.removeClass('hidden');
+	});
+	blockSwitch.append(item);
+	return {'item': item, 'content': content};
+}
+
+$(addBlockSwitches);    
+</script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled :: Community Collaboration Guide</title>
+    <link rel="canonical" href="https://redhat-documentation.github.io/community/latest/structure.html">
+    <meta name="generator" content="Antora 1.0.1">
+    <link rel="stylesheet" href="../../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header" role="banner">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://redhat-documentation.github.io">Community Collaboration Guide</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/">Documentation Home</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">AeroGear SDK</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/android-sdk/latest/index.html">Android</a>
+            <a class="navbar-item" href="/ios/latest/index.html">iOS</a>
+            <a class="navbar-item" href="/cordova/latest/index.html">Cordova</a>
+            <a class="navbar-item" href="/xamarin-sdk/latest/index.html">Xamarin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Mobile Services</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/custom/latest/index.html">Custom Runtime Connector</a>
+            <a class="navbar-item" href="/push/latest/index.html">Unified Push</a>
+            <a class="navbar-item" href="/keycloak/latest/index.html">Auth</a>       
+            <a class="navbar-item" href="/metrics/latest/index.html">Metrics</a>
+            <a class="navbar-item" href="/build/latest/index.html">CI/CD</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="main-wrapper">
+<div class="navigation-container" data-component="community" data-version="latest">
+  <aside class="navigation" role="navigation">
+    <div class="panels">
+<div class="navigation-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Community Collaboration Guide</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="introduction.html">About Community Documentation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_upstream.html">Contributing Upstream</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="community_evaluation.html">Evaluating upstream communities</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="creating_a_new_repository.html">Creating a new repository</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="migrating_an_existing_repository.html">Migrating an existing repository</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="structure.html">Project structure</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="asciidoc.html">About AsciiDoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="publishing.html">Publishing Content</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="contributing_to_the_framework.html">Contributing to the framework</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="navigation-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Community Collaboration Guide</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Community Collaboration Guide</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+  <main class="main" role="main">
+<div class="toolbar" role="navigation">
+  <button class="navigation-toggle"></button>
+  <a href="introduction.html" class="home-link"></a>
+<nav class="crumbs" role="navigation" aria-label="breadcrumbs">
+  <ul>
+    <li class="crumb"><a href="index.html">Community Collaboration Guide</a></li>
+    <li class="crumb"><a href="structure.html">Project structure</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///home/pwright/repos/community-collaboration-guide/modules/ROOT/pages/structure.adoc"></a></div>
+</div>
+<article class="doc">
+<div class="sect1">
+<h2 id="ccg-project-structure"><a class="anchor" href="#ccg-project-structure"></a>Project structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There is no single structure that will work for all projects, rather as a project grows and becomes more complex, it is likely to move through a variety of different structures.  The repository structure may change as files and directories are added, a large repository may split into separate, related repositories, etc.    As a project grows, the documentation needs for the project also grow. And just like you want to have a plan for project architecture that changes and adapts as the project grows, you likewise want to have a plan for the documentation structure that grows and adapts as the doc set grows.</p>
+</div>
+<div class="paragraph">
+<p>This section discusses repository and directory structure and how to structure your content for ease of reuse (both in multiple documents and in upstream/downstream documents).</p>
+</div>
+<div class="sect2">
+<h3 id="ccg-directory-structure"><a class="anchor" href="#ccg-directory-structure"></a>Directory structure</h3>
+<div class="paragraph">
+<p>The first steps towards documenting a project are often found in the README file of the repository.   Eventually the project will grow to where there is a need for more documentation than you can fit in a single README, and that may appear in the form of a project wiki, a separate installation guide, possibly a developer guide, and one or more user guides.   You may start out with all of the documentation in the same repository as the code, but as things grow more complex, you may want to consider having a separate repository for your documentation.  This makes it easier for community members who may only want to contribute to the documentation, as they don’t have to worry about merge conflicts in the code.</p>
+</div>
+<div class="paragraph">
+<p>As your project grows, you should consider the structure you want to use for your documentation directory.  Directories should be structured in a logical and related fashion. Many projects have a documentation repo or directory for their project web page, and possibly a separate repo or directory for the project documentation.  You may choose to have separate repositories for each “manual” or you may choose to have all the documents in your doc set share a repository.  Contribution style and build requirements are two primary considerations when you decide how to proceed.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Add a docs directory to the code repository.</dt>
+<dd>
+<p>This makes it easier for developers to update the documentation, but may present a challenge for non-developers who want to contribute to the documentation but may have difficulties following the repository workflow used by developers.</p>
+</dd>
+<dt class="hdlist1">Add a new repo for each new title or document.</dt>
+<dd>
+<p>The single title per repository model allows independent updates between titles, but prevents topic sharing among titles.</p>
+</dd>
+<dt class="hdlist1">Add a new repo with multiple titles or documents.</dt>
+<dd>
+<p>The multiple title per repository model enables simple-and-easy topic sharing between titles, but does require building all titles when updates are made.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-flat-file-structure"><a class="anchor" href="#ccg-flat-file-structure"></a>Flat file structure</h3>
+<div class="paragraph">
+<p>In a flat-file structure there are no sub-directories, just one directory with all the documentation files in a single directory.  A flat file structure might be as simple as a single README file, or contain a complete guide. A flat file structure for an AsciiDoc guide might look something like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>├── README.adoc
+├── documentation
+├──|── master-docinfo.xml
+├──|── master.adoc
+├──|── attributes.adoc
+├──|── logo.png
+├──|── screenshot1.png
+├──|── screenshot2.png
+├──|── screenshot3.png
+├──|── topic-1.adoc
+├──|── topic-2.adoc
+├──|── topic-4.adoc
+├──|── topic-5.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In a flat file system every file must have a different name because there is only one list of files.  A flat file structure may work with a very small number of files, but once a documentation project becomes more complex, it becomes more difficult to have all the files in the same directory.  And that is when the documentation for project may require a more complex structure.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-single-book-structure"><a class="anchor" href="#ccg-single-book-structure"></a>Single book structure</h3>
+<div class="paragraph">
+<p>If you do not share any content between books you may choose a single book per directory structure.  A structure with a single AsciiDoc guide per repository might look something like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>├── README.adoc
+├── docs
+│   ├── DocumentTitle
+│   ├──-|──  topics -&gt; ../topics/ (symlink to docs/topics/)
+│   ├──-|── master-docinfo.xml
+│   ├──-|── master.adoc   (book file/table of contents for the documentation)
+│   │   ├── /topics  (all topic files for the documentation)
+│   │   │   ├──  /images (all images for the documentation)
+│   │   │   │    ├── logo.png
+│   │   │   │    ├──screenshot1.png
+│   │   │   │    ├── screenshot2.png
+│   │   │   │    ├──screenshot3.png
+│   │   │   ├── attributes.adoc (variables file)
+│   │   │   ├── topic-1.adoc
+│   │   │   ├── topic-2.adoc
+│   │   │   ├── topic-4.adoc
+│   │   │   └── topic-5.adoc
+└── scripts (Scripts to automatically create and build documentation)
+    └── buildGuides.sh</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-multiple-book-structure"><a class="anchor" href="#ccg-multiple-book-structure"></a>Multiple book structure</h3>
+<div class="paragraph">
+<p>If you have common files that you want to reuse between books, you may choose a more complex directory structure, where all the books live in the same repository and have access to common files.</p>
+</div>
+<div class="paragraph">
+<p>Note that in the following multiple book structure each “book” directory has a symlink to a common directory for topic files.  This allows you to use any individual topic in any book, saving time writing and updating topics that appear in more than one place.  This structure also uses a common directory for images inside the topics directory, again allowing for reuse of images such as button icons and product logos.  And the attributes file is also common, allowing for the same replacement variables in all files and books.</p>
+</div>
+<div class="paragraph">
+<p>A structure with multiple AsciiDoc guides per repository and a single topic directory might look something like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>├── README.md
+├── docs
+│   ├── Title_A
+│   │   ├── master.adoc
+│   │   ├── master-docinfo.xml
+│   │   ├── topics -&gt; ../topics/ (symlink to docs/topics/)
+│   ├── Title_B
+│   │   ├── master.adoc
+│   │   ├── master-docinfo.xml
+│   │   ├── topics -&gt; ../topics/ (symlink to docs/topics/)
+│   ├── Title_C
+│   │   ├── master.adoc
+│   │   ├── master-docinfo.xml
+│   │   ├── topics -&gt; ../topics/ (symlink to docs/topics/)
+│   ├── topics (all topics for titles)
+│   │   │   ├── images (all the images for titles)
+│   │   │   |   ├──  logo.png
+│   │   │   |   ├──  screenshot1.png
+│   │   │   |   ├── screenshot2.png
+│   │   │   |   ├── screenshot3.png
+│   │   │   ├──attributes.adoc (variables file)
+│   │   │   ├── topic-1.adoc
+│   │   │   ├── topic-2.adoc
+│   │   │   ├── topic-4.adoc
+│   │   │   └── topic-5.adoc
+│   │   │   ├── topic-shared-1.adoc
+│   │   │   ├──  topic-shared-2.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And a structure with multiple AsciiDoc guides per repository and multiple topic directories might look something like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>├── README.adoc
+├── docs
+│   ├── title-a
+│   │   ├── enterprise
+│   │   │   ├── master-docinfo.xml
+│   │   │   ├── master.adoc
+│   │   │   └── topics -&gt; ../topics
+│   │   ├── topics
+│   │   │   ├── shared -&gt; ../../shared
+│   │   │   ├── topic-1.adoc
+│   │   │   ├── topic-2.adoc
+│   │   │   ├── topic-4.adoc
+│   │   │   └── topic-5.adoc
+│   │   └── upstream-1
+│   │       ├── master-docinfo.xml
+│   │       ├── master.adoc
+│   │       └── topics -&gt; ../topics
+│   ├── title-b
+│   │   ├── enterprise
+│   │   │   ├── master-docinfo.xml
+│   │   │   ├── master.adoc
+│   │   │   └── topics -&gt; ../topics
+│   │   ├── topics
+│   │   │   ├── shared -&gt; ../../shared
+│   │   │   ├── topic-1.adoc
+│   │   │   ├── topic-2.adoc
+│   │   │   ├── topic-4.adoc
+│   │   │   └── topic-5.adoc
+│   │   └── upstream-1
+│   │       ├── master-docinfo.xml
+│   │       ├── master.adoc
+│   │       └── topics -&gt; ../topics
+│   └── shared
+│       ├── attributes.adoc (variables file)
+│       ├── images (all images for titles)
+│       ├── templates
+│       │   └── revision-info.adoc
+│       ├── topic-shared-1.adoc
+│       └── topic-shared-2.adoc
+└── resources
+    ├── asciidoc-writing-guide.adoc
+    └── scripts
+        └── buildGuides.sh</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-content-structure"><a class="anchor" href="#ccg-content-structure"></a>Content structure</h3>
+<div class="paragraph">
+<p>Rather than writing your documentation in a single lengthy file, a best practice is to break the content up into small chunks.  There are several reasons why this is a good idea.   Having some sort of structure for your content provides many benefits for both readers and writers of your documentation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Onboarding new contributors</strong> – It’s easier for new contributors to add to the documentation if they have some sort of template or pattern to follow. For example, all 	UNIX/LINUX man pages follow a similar structure, so when a developer is documenting a new command, they can follow that familiar pattern.</p>
+<div class="paragraph">
+<p>A commonly used pattern for documentation is to chunk content into one of three types of topics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Procedure or Task</strong> – The ordered steps to complete a task or perform an action using the software.</p>
+</li>
+<li>
+<p><strong>Concept or Overview</strong> – Product specific terminology or concepts that the user needs to understand in order to successfully use the software.</p>
+</li>
+<li>
+<p><strong>Reference</strong> – Reference material about the software, for example configuration settings , lists of commands, or API documentation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Reusability</strong> – If you write content in small chunks, it can be reused in different documents that cover the same topics. For example, topics such as “System Requirements” or “Supported Platforms” might appear in Release Notes, planning documentation, and installation documentation.</p>
+</li>
+<li>
+<p><strong>Findability</strong> – Content that is properly structured makes it easier for readers to find answers to their 	questions. For example, when procedures are properly formatted as	numbered steps, readers don’t have to search paragraphs of text for instructions for how to complete a task. Projects that follow naming conventions and have an organizational structure make it easier for contributing writers to find and update topics.</p>
+</li>
+<li>
+<p><strong>Organization</strong> – Writing content in small chunks makes it easier to rearrange content than writing content in longer files.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In general when writing content you want to use simple language and avoid jargon that people unfamiliar with your project might not understand  Writing short sentences and short paragraphs also makes your content easier to read and understand.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ccg-file-naming"><a class="anchor" href="#ccg-file-naming"></a>File naming</h3>
+<div class="paragraph">
+<p>No matter what repo and directory structure you choose, directory and file names should be clear and consistent.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Numbered file names like "52187.adoc" or “IMG_390.png” are more likely to cause confusion for other contributors.</p>
+</li>
+<li>
+<p>Short file names are good, as long as they&#8217;re still meaningful.  But give enough detail to make the content clear (“overview.adoc” could be anything).</p>
+</li>
+<li>
+<p>Long file names are often unwieldy, hard to work with, and easy to mistype.  Try to find the right balance for file name length.</p>
+</li>
+<li>
+<p>File names should reflect the topic they cover to help contributors find content in your files.</p>
+</li>
+<li>
+<p>Do not include the project or product name, book name, release version, or anything similar in file names.</p>
+</li>
+<li>
+<p>Do not hard-code file names when linking documents, use  relative paths to the topic or directory.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </main>
+</div>
+<footer class="footer">
+  <p>This is a preview of the https://docs.aerogear.org website.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script src="../../_/js/vendor/highlight.js"></script>
+<script>hljs.initHighlighting()</script>
+  </body>
+</html>
