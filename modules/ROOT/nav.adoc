@@ -1,0 +1,19 @@
+* xref:introduction.adoc[]
+
+* xref:contributing_upstream.adoc[]
+
+* xref:community_evaluation.adoc[]
+
+* xref:creating_a_new_repository.adoc[]
+
+* xref:migrating_an_existing_repository.adoc[]
+
+* xref:structure.adoc[]
+
+* xref:asciidoc.adoc[]
+
+* xref:building.adoc[]
+
+* xref:publishing.adoc[]
+
+* xref:contributing_to_the_framework.adoc[]
