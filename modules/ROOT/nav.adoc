@@ -1,8 +1,8 @@
-* xref:introduction.adoc[About Community Documentation]
-** xref:introduction.adoc#ccg-introduction[Introduction]
+* xref:index.adoc[About Community Documentation]
+** xref:index.adoc#ccg-introduction[Introduction]
 
-** xref:introduction.adoc#ccg-overview[Overview]
-** xref:introduction.adoc#ccg-contacts[Contacts]
+** xref:index.adoc#ccg-overview[Overview]
+** xref:index.adoc#ccg-contacts[Contacts]
 
 
 * xref:contributing_upstream.adoc[Contributing Upstream]
